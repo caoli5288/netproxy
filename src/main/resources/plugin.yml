@@ -1,0 +1,5 @@
+name: NetProxy
+main: com.i5mc.netproxy.Main
+version: ${project.version}
+author: caoli5288
+load: STARTUP
