@@ -9,7 +9,6 @@ import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.SocketAddress;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -47,7 +46,10 @@ public class MXProxySelector extends ProxySelector {
         if (scheme.matcher(uri.getScheme()).matches()) {
             val p = selector.select(uri.getHost());
             main.log("Req " + uri + " via " + p);
-            return Arrays.asList(p);
+            if (p == Proxy.NO_PROXY) {
+                return def.select(uri);
+            }
+            return ImmutableList.of(p);
         }
         return def.select(uri);
     }
