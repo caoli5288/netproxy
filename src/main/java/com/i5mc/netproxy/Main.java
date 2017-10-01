@@ -23,8 +23,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getConfig().options().copyDefaults(true);
         saveDefaultConfig();
+
         val sel = Selector.build((List<Map<String, ?>>) getConfig().getList("proxy"));
+
         p = new MXProxySelector(this, sel);
         p.hook();
     }
